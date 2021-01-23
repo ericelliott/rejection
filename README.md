@@ -1,1 +1,5 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+# rejection
+
+You gotta lose to win.
+
+![Rejection](./images/rejection.png)

@@ -1,15 +1,42 @@
 {
-  "name": "learn-starter",
+  "name": "rejection",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "riteway -r @babel/register 'src/**/*.test.js' | tap-nirvana",
+    "lint": "eslint --fix . && echo 'Lint 🌟'",
+    "watch": "watch 'clear && \"yarn run -s test\"' src",
+    "watch:lint": "watch 'clear && concurrently \"yarn run -s test\" \"yarn run -s lint\"' src"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "next": "^10.0.0",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/register": "^7.12.10",
+    "@babel/runtime-corejs2": "^7.12.5",
+    "concurrently": "^5.3.0",
+    "core-js": "^3.8.2",
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.2.1",
+    "riteway": "^6.2.1",
+    "tap-nirvana": "^1.1.0",
+    "watch": "^1.0.2"
   }
 }
