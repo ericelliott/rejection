@@ -3,6 +3,7 @@ export default function AddQuestion({ handleAdd }) {
     <div className="add-question">
       <input
         type="text"
+        placeholder="..."
         onKeyPress={({ key, target }) => {
           key === "Enter" && handleAdd({ text: target.value });
         }}
@@ -23,6 +24,9 @@ export default function AddQuestion({ handleAdd }) {
           color: salmon;
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
             Droid Sans, Helvetica Neue, sans-serif;
+        }
+        ::placeholder {
+          color: lightgrey;
         }
       `}</style>
     </div>
