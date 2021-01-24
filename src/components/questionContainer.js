@@ -1,23 +1,38 @@
+import { useDispatch } from "react-redux";
+
+import { updateQuestionStatus } from "../features/rejection/action-creators";
 import Question from "./question";
 
+const mapStatusToScore = (status) => (status === "Rejected" ? 100 : status === "Accepted" ? 10 : 0);
+
 export default function QuestionContainer({ questions }) {
+  const dispatch = useDispatch();
+
+  const handleStatusClick = ({ id, status }) => {
+    dispatch(updateQuestionStatus({ id, status }));
+  };
+
   return (
     <div className="question-container">
       <div>
         <ul>
-          {questions.map((question, key) => (
-            <li key={key}>
-              <Question {...question} />
-            </li>
-          ))}
+          {questions.map((question, key) => {
+            return (
+              <li key={key}>
+                <Question
+                  handleStatusClick={handleStatusClick}
+                  {...question}
+                  score={mapStatusToScore(question.status)}
+                />
+              </li>
+            );
+          })}
         </ul>
       </div>
       <style jsx>{`
         .question-container {
-          // margin-top: 10em;
-        }
-        .question-container {
           padding: 2rem;
+          padding-top: 5rem;
         }
         ul {
           padding: 0;
