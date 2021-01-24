@@ -22,6 +22,7 @@ export default function Question({ id, askee, handleStatusClick, timestamp, ques
             <ul>
               {statuses.map(({ name, value }) => (
                 <li
+                  key={name}
                   className={`${name} ${status === value ? "active" : ""}`}
                   onClick={() => handleStatusClick({ id, status: value })}
                 >
@@ -32,7 +33,7 @@ export default function Question({ id, askee, handleStatusClick, timestamp, ques
           </div>
           <div className="askee">{askee}</div>
           <div className="divider">&bull;</div>
-          <div className="timestamp">{timestamp}</div>
+          <div className="timestamp">{new Date(timestamp).toLocaleDateString("en-GB")}</div>
         </div>
       </div>
       <div className="score">{score > 0 ? `+${score}` : ""}</div>
