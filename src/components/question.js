@@ -1,20 +1,41 @@
-const mapStatusToScore = (status) => (status === "Rejected" ? "+100" : status === "Accepted" ? "+10" : "");
+import { useState } from "react";
 
-// todo: mapping should move to container layer
+export default function Question({ id, askee, handleStatusClick, timestamp, question, status, score }) {
+  const [isEditing, setisEditing] = useState(false);
 
-export default function Question({ askee, timestamp, question, status }) {
+  const handleNameClick = () => setisEditing(!isEditing);
+
+  const statuses = [
+    { name: "accepted", value: "Accepted" },
+    { name: "rejected", value: "Rejected" },
+    { name: "unanswered", value: "Unanswered" }
+  ];
+
   return (
-    <div
-      className={`question ${status.toLowerCase()}`}
-      onClick={() => {
-        alert("edit");
-      }}
-    >
-      <div className="name">{question}</div>
-      <div className="details">
-        {timestamp} / {askee}
+    <div className={`question ${status.toLowerCase()}`}>
+      <div className="name" onClick={handleNameClick}>
+        {question}
       </div>
-      <div className="score">{mapStatusToScore(status)}</div>
+      <div className="details">
+        <div className={`edit ${isEditing ? "active" : ""}`}>
+          <div className="status">
+            <ul>
+              {statuses.map(({ name, value }) => (
+                <li
+                  className={`${name} ${status === value ? "active" : ""}`}
+                  onClick={() => handleStatusClick({ id, status: value })}
+                >
+                  {value}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="askee">{askee}</div>
+          <div className="divider">&bull;</div>
+          <div className="timestamp">{timestamp}</div>
+        </div>
+      </div>
+      <div className="score">{score > 0 ? `+${score}` : ""}</div>
 
       <style jsx>
         {`
@@ -26,12 +47,14 @@ export default function Question({ askee, timestamp, question, status }) {
             font-size: 3em;
             font-weight: bold;
             line-height: 1.2;
+            cursor: pointer;
+            user-select: none;
           }
           .question.accepted .name {
-            color: salmon;
+            color: #95d7b1;
           }
           .question.rejected .name {
-            color: #95d7b1;
+            color: salmon;
           }
           .question.unanswered .name {
             color: lightgrey;
@@ -43,6 +66,63 @@ export default function Question({ askee, timestamp, question, status }) {
             font-size: 3em;
             font-weight: bold;
             color: salmon;
+          }
+          .edit {
+            display: none;
+          }
+          .edit.active {
+            display: block;
+          }
+          .status,
+          .timestamp,
+          .askee,
+          .divider {
+            display: inline-block;
+            margin-right: 0.25em;
+          }
+          .timestamp,
+          .askee,
+          .divider {
+            // color: lightgrey;
+          }
+          .timestamp {
+            color: black;
+          }
+          .askee {
+            // margin-right: 0.5em;
+          }
+          .status {
+            margin-left: 1em;
+            margin-right: 4em;
+          }
+          .status ul {
+            list-style: none;
+            padding: 0;
+          }
+          .status ul li {
+            display: inline-block;
+            cursor: pointer;
+            list-style: none;
+            margin-right: 0.5em;
+            padding-bottom: 2px;
+            user-select: none;
+          }
+          .status ul li:hover,
+          .status ul li.active {
+            border-bottom: 2px solid black;
+            padding-bottom: 0;
+          }
+          .status ul li.accepted:hover,
+          .status ul li.accepted.active {
+            border-color: #95d7b1;
+          }
+          .status ul li.rejected:hover,
+          .status ul li.rejected.active {
+            border-color: salmon;
+          }
+          .status ul li.unanswered:hover,
+          .status ul li.unanswered.active {
+            border-color: lightgrey;
           }
         `}
       </style>
