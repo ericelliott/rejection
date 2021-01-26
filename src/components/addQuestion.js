@@ -28,7 +28,7 @@ export default function AddQuestion({ handleAdd }) {
           outline: none;
           font-size: 3em;
           font-weight: bold;
-          line-height: 1.2;
+          line-height: 1.5;
           margin-bottom: 0.25em;
           color: salmon;
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
