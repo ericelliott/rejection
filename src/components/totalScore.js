@@ -1,9 +1,12 @@
 export default function TotalScore({ score }) {
   return (
     <div className="total-score">
-      <div className="total">{score}</div>
-      <div className="divider">&nbsp;</div>
-      <div className="target">500</div>
+      <div>
+        <div className="total">{score}</div>
+        <div className="divider">&nbsp;</div>
+        <div className="target">500</div>
+        <span className="label">weekly target</span>
+      </div>
 
       <style jsx>{`
         .total-score {
@@ -28,6 +31,15 @@ export default function TotalScore({ score }) {
           margin-right: 0.25em;
           height: 1.4em;
           line-height: 1.3;
+        }
+        .label {
+          display: block;
+          font-size: 1rem;
+          font-weight: normal;
+          color: black;
+          text-align: right;
+          margin-top: -0.75em;
+          padding-right: 0.3em;
         }
       `}</style>
     </div>
