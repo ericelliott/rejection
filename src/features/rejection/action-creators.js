@@ -5,7 +5,7 @@ export const addQuestion = ({
   timestamp = Date.now(),
   question,
   askee,
-  status = "Unanswered"
+  status = "UNANSWERED"
 } = {}) => ({
   type: "ADD_QUESTION",
   payload: {

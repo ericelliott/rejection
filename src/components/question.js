@@ -6,9 +6,9 @@ export default function Question({ id, askee, handleStatusClick, timestamp, ques
   const handleNameClick = () => setisEditing(!isEditing);
 
   const statuses = [
-    { name: "accepted", value: "Accepted" },
-    { name: "rejected", value: "Rejected" },
-    { name: "unanswered", value: "Unanswered" }
+    { name: "accepted", value: "ACCEPTED" },
+    { name: "rejected", value: "REJECTED" },
+    { name: "unanswered", value: "UNANSWERED" }
   ];
 
   return (
@@ -24,9 +24,9 @@ export default function Question({ id, askee, handleStatusClick, timestamp, ques
                 <li
                   key={name}
                   className={`${name} ${status === value ? "active" : ""}`}
-                  onClick={() => handleStatusClick({ id, status: value })}
+                  onClick={() => handleStatusClick({ id, status: value.toUpperCase() })}
                 >
-                  {value}
+                  {value.toLowerCase()}
                 </li>
               ))}
             </ul>
@@ -107,6 +107,7 @@ export default function Question({ id, askee, handleStatusClick, timestamp, ques
             margin-right: 0.5em;
             padding-bottom: 2px;
             user-select: none;
+            text-transform: capitalize;
           }
           .status ul li:hover,
           .status ul li.active {

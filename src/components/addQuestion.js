@@ -1,7 +1,20 @@
 import { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { QUESTIONS } from "../queries/";
+import { ADD_QUESTION } from "../mutations";
 
-export default function AddQuestion({ handleAdd }) {
+const createQuestion = ({ timestamp = Date.now(), askee, question, status = "UNANSWERED" }) => ({
+  timestamp,
+  askee,
+  question,
+  status
+});
+
+export default function AddQuestion() {
   const [question, setQuestion] = useState("");
+  const [addQuestion] = useMutation(ADD_QUESTION, {
+    refetchQueries: [{ query: QUESTIONS }]
+  });
 
   return (
     <div className="add-question">
@@ -12,7 +25,11 @@ export default function AddQuestion({ handleAdd }) {
         onChange={({ target }) => setQuestion(target.value)}
         onKeyPress={({ key, target }) => {
           if (key === "Enter") {
-            handleAdd({ text: target.value });
+            addQuestion({
+              variables: {
+                data: createQuestion({ askee: "someone", question: target.value })
+              }
+            });
             setQuestion("");
           }
         }}

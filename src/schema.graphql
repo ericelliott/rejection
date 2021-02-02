@@ -1,0 +1,12 @@
+type Question {
+  askee: String!
+  question: String!
+  timestamp: Long!
+  status: QuestionStatus!
+}
+
+enum QuestionStatus {
+  ACCEPTED
+  REJECTED
+  UNANSWERED
+}
